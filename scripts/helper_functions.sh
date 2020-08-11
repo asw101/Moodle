@@ -116,10 +116,9 @@ function create_azure_files_moodle_share
     local fileServerDiskSize=$4
 
     az storage share create \
-        --name moodle \
+        --name moodledata \
         --account-name $storageAccountName \
         --account-key $storageAccountKey \
-        --fail-on-exist >>$logFilePath \
         --quota $fileServerDiskSize
 }
 
@@ -143,12 +142,12 @@ password=$storageAccountKey
 EOF
     chmod 600 /etc/moodle_azure_files.credential
     
-    grep -q -s "^//$storageAccountName.file.core.windows.net/moodle\s\s*/moodle\s\s*cifs" /etc/fstab && _RET=$? || _RET=$?
+    grep -q -s "^//$storageAccountName.file.core.windows.net/moodledata\s\s*/moodle/moodledata\s\s*cifs" /etc/fstab && _RET=$? || _RET=$?
     if [ $_RET != "0" ]; then
-        echo -e "\n//$storageAccountName.file.core.windows.net/moodle   /moodle cifs    credentials=/etc/moodle_azure_files.credential,uid=www-data,gid=www-data,nofail,vers=3.0,dir_mode=0770,file_mode=0660,serverino,mfsymlinks" >> /etc/fstab
+        echo -e "\n//$storageAccountName.file.core.windows.net/moodledata   /moodle/moodledata cifs    credentials=/etc/moodle_azure_files.credential,uid=www-data,gid=www-data,nofail,vers=3.0,dir_mode=0770,file_mode=0660,serverino,mfsymlinks" >> /etc/fstab
     fi
-    mkdir -p /moodle
-    mount /moodle
+    mkdir -p /moodle/moodledata
+    mount /moodle/moodledata
 }
 
 function setup_moodle_mount_dependency_for_systemd_service
