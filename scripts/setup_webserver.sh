@@ -119,6 +119,8 @@ check_fileServerType_param $fileServerType
     configure_nfs_client_and_mount0 $nfsByoIpExportPath /moodle
   else # "azurefiles"
     setup_and_mount_azure_files_moodle_share $storageAccountName $storageAccountKey
+    # extract other folders from moodle.tar.gz
+    tar -xvf /moodle/moodledata/_/moodle.tar.gz -C /
   fi
 
   # Configure syslog to forward

@@ -947,6 +947,9 @@ EOF
 		# Move the local installation over to the Azure Files
 		echo -e '\n\rMoving locally installed moodle over to Azure Files'
 		cp -a /moodle/_moodledata/* /moodle/moodledata || true # Ignore case sensitive directory copy failure
+		# tar all other files into /moodle/moodledata/_/
+		mkdir -p /moodle/moodledata/_/
+		tar -zcvf /moodledata/_/moodle.tar.gz /moodle/_moodledata/ /moodle/certs/ /moodle/html/
 	fi
    fi
 
