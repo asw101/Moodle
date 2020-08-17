@@ -122,7 +122,7 @@ check_fileServerType_param $fileServerType
   else # "azurefiles"
     setup_and_mount_azure_files_moodle_share $storageAccountName $storageAccountKey
     # extract other folders from moodle.tar.gz
-    MOODLE_TAR='/moodle/moodledata/_/moodle.tar.get'
+    MOODLE_TAR='/moodle/moodledata/_/moodle.tar.gz'
     while [ ! -f "$MOODLE_TAR" ]; do
         echo "waiting for: $MOODLE_TAR"
         sleep 10
