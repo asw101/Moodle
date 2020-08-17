@@ -181,11 +181,10 @@ set -ex
     
     # install pre-requisites
     sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
-    sudo apt-get update > /dev/null 2>&1
-    #sudo apt-get install -y --fix-missing python-software-properties unzip
-    sudo apt-get install software-properties-common
-    sudo apt-get install unzip
-
+    sudo apt-get update
+    sudo apt-get install -y \
+	    software-properties-common \
+	    unzip
 
     # install the entire stack
     # passing php versions $phpVersion

@@ -53,15 +53,17 @@ check_fileServerType_param $fileServerType
 
 {
   # make sure the system does automatic update
-  sudo apt-get -y update
+  sudo apt-get update
   sudo apt-get -y install unattended-upgrades
 
   # install pre-requisites
-  #sudo apt-get -y install python-software-properties unzip rsyslog
-  sudo apt-get install software-properties-common
-  sudo apt-get install unzip
-  sudo apt-get install rsyslog
-  sudo apt-get -y install postgresql-client mysql-client git
+  sudo apt-get install -y \
+	  software-properties-common \
+	  unzip \
+	  git \
+	  rsyslog \
+	  mysql-client \
+	  postgresql-client
 
   if [ $fileServerType = "gluster" ]; then
     #configure gluster repository & install gluster client

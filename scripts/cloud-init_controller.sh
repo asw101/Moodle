@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export DEBIAN_FRONTEND=noninteractive
+
 git clone -b asw101-dev https://github.com/asw101/Moodle
 cd /home/azureadmin/Moodle/scripts/
 apt-get update && apt-get install -y moreutils
