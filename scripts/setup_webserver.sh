@@ -120,7 +120,12 @@ check_fileServerType_param $fileServerType
   else # "azurefiles"
     setup_and_mount_azure_files_moodle_share $storageAccountName $storageAccountKey
     # extract other folders from moodle.tar.gz
-    tar -xvf /moodle/moodledata/_/moodle.tar.gz -C /
+    MOODLE_TAR='/moodle/moodledata/_/moodle.tar.get'
+    while [ ! -f "$MOODLE_TAR" ]; do
+        echo "waiting for: $MOODLE_TAR"
+        sleep 10
+    done
+    tar -xvf $MOODLE_TAR -C /
   fi
 
   # Configure syslog to forward
